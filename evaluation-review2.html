@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Project Evaluation - Review 2</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <style>
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #181f2e 0%, #232c41 100%);
+      color: #f4f6fb;
+    }
+    .main-wrapper {
+      max-width: 920px;
+      margin: 38px auto;
+      background: rgba(24, 31, 46, 0.94);
+      border-radius: 20px;
+      padding: 40px 40px 35px 40px;
+      box-shadow: 0 8px 40px rgba(35,44,65,0.16), 0 1.5px 5px rgba(70,60,60,0.07);
+    }
+    .header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+    .profile-icon {
+      background: linear-gradient(45deg, #4f46e5, #8b5cf6);
+      width: 65px;
+      height: 65px;
+      border-radius: 14px;
+      border: 3px solid #2f3655;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 28px;
+    }
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    .nav-link {
+      padding: 9px 18px;
+      border-radius: 8px;
+      text-decoration: none;
+      color: #8cbffa;
+      font-weight: 600;
+      background: none;
+      transition: 0.15s;
+    }
+    .nav-link.active,
+    .nav-link:hover {
+      color: #fff;
+      background: linear-gradient(90deg, #4f46e5 70%, #be9e6f 100%);
+    }
+    h1 {
+      font-size: 2.1rem;
+      font-weight: 830;
+      color: #ffeaa7;
+      letter-spacing: 0.075em;
+    }
+    .eval-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-top: 24px;
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px 20px;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    .form-group label {
+      font-weight: 520;
+      color: #c6dfff;
+    }
+    .form-group input, .form-group textarea {
+      padding: 10px 13px;
+      border-radius: 7px;
+      background: #232c41;
+      border: none;
+      color: #eff0fe;
+      font-size: 1em;
+    }
+    .rubric-table, .main-table {
+      border-collapse: collapse;
+      width: 100%;
+      background: none;
+      margin-top: 15px;
+      font-size: 1.06em;
+    }
+    .main-table {
+      width: 100%;
+      table-layout: fixed;
+    }
+    .main-table th, .rubric-table th {
+      background: #977298;
+      color: white;
+      padding: 12px;
+      text-align: center;
+      border-radius: 7px;
+      border: 1px solid #53416d;
+    }
+    .main-table th:nth-child(1), .main-table td:nth-child(1) {
+      width: 70%;
+    }
+    .main-table th:nth-child(2), .main-table td:nth-child(2) {
+      width: 30%;
+    }
+    .main-table td, .rubric-table td {
+      background: #1d253c;
+      color: #eee;
+      border: 1.5px solid #334;
+      text-align: center;
+      padding: 16px;
+      word-break: break-word;
+    }
+    .main-table td input {
+      width: 90%;
+      padding: 8px;
+      border-radius: 6px;
+      border: none;
+      font-size: 1.1em;
+      background-color: #232c41;
+      color: #eee;
+      box-sizing: border-box;
+      font-weight: 600;
+    }
+    .rubric-table td {
+      font-weight: normal;
+      text-align: left;
+      padding: 16px 20px;
+      background: #1d253c;
+      color: #eee;
+      border: 1.5px solid #334;
+    }
+    .submit-btn {
+      background: linear-gradient(90deg, #be9e6f 60%, #4f46e5 100%);
+      color: #fff;
+      padding: 15px 36px;
+      font-weight: bold;
+      font-size: 1.05em;
+      border: none;
+      border-radius: 12px;
+      margin-top: 22px;
+      align-self: flex-end;
+      cursor: pointer;
+      transition: background .15s;
+    }
+    .submit-btn:disabled {
+      background: #555;
+      cursor: not-allowed;
+    }
+    .submit-btn:hover:not(:disabled) {
+      background: linear-gradient(90deg, #b39264 0%, #682ae9 92%);
+    }
+    @media (max-width: 900px) {
+      .main-wrapper { padding: 18px 2vw 25px 2vw; }
+      .form-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 700px) {
+      .main-wrapper { max-width: 99vw; padding: 4vw; }
+      .form-grid { grid-template-columns: 1fr; gap: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="main-wrapper">
+    <div class="header-row">
+      <h1>Project Evaluation - Review 2</h1>
+      <div class="profile-icon">U</div>
+    </div>
+    <nav class="nav-links">
+      <a href="dashboard.html" class="nav-link">Dashboard</a>
+      <a href="projects.html" class="nav-link">View Projects</a>
+      <a href="evaluation-review0.html" class="nav-link">Evaluation (Review 0)</a>
+      <a href="evaluation-review1.html" class="nav-link">Evaluation (Review 1)</a>
+      <a href="evaluation-review2.html" class="nav-link active">Evaluation (Review 2)</a>
+    </nav>
+    <form id="review2Form" class="eval-form">
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="student_id">Student ID</label>
+          <input id="student_id" type="text" required />
+        </div>
+        <div class="form-group">
+          <label for="project_id">Project ID</label>
+          <input id="project_id" type="text" required />
+        </div>
+        <div class="form-group">
+          <label for="faculty_id">Faculty ID</label>
+          <input id="faculty_id" type="text" required />
+        </div>
+        <div class="form-group" style="grid-column: 1 / span 3;">
+          <label for="comments">Comments</label>
+          <textarea id="comments" placeholder="Enter your comments..." rows="2"></textarea>
+        </div>
+      </div>
+
+      <h3 style="color: #b394ec; margin-top: 26px;">Review 2 (60 marks)</h3>
+      <table class="main-table">
+        <tr>
+          <th>Criteria</th>
+          <th>Marks Awarded</th>
+        </tr>
+        <tr>
+          <td><b>Design Methodology (15)</b></td>
+          <td>
+            <input id="design_marks" type="number" placeholder="Enter marks" max="15" min="0" required />
+          </td>
+        </tr>
+        <tr>
+          <td><b>Implementation (15)</b></td>
+          <td>
+            <input id="implementation_marks" type="number" placeholder="Enter marks" max="15" min="0" required />
+          </td>
+        </tr>
+        <tr>
+          <td><b>Presentation (15)</b></td>
+          <td>
+            <input id="presentation_marks" type="number" placeholder="Enter marks" max="15" min="0" required />
+          </td>
+        </tr>
+        <tr>
+          <td><b>Report (15)</b></td>
+          <td>
+            <input id="report_marks" type="number" placeholder="Enter marks" max="15" min="0" required />
+          </td>
+        </tr>
+      </table>
+
+      <h3 style="color: #b394ec; margin-top: 42px;">Evaluation Rubrics</h3>
+      <table class="rubric-table">
+        <tr>
+          <th>Criteria</th>
+          <th>11–15 marks</th>
+          <th>5–10 marks</th>
+          <th>1–4 marks</th>
+        </tr>
+        <tr>
+          <td><b>Design Methodology (15)</b></td>
+          <td>Clear design with neat diagrams presented</td>
+          <td>Average design</td>
+          <td>Poor design</td>
+        </tr>
+        <tr>
+          <td><b>Implementation (15)</b></td>
+          <td>100% implementation done and demonstrated</td>
+          <td>60% implementation done and demonstrated</td>
+          <td>30% implementation done and demonstrated</td>
+        </tr>
+        <tr>
+          <td><b>Presentation (15)</b></td>
+          <td>Excellent presentation with professional slides</td>
+          <td>Average presentation with good slides</td>
+          <td>Poor presentation</td>
+        </tr>
+        <tr>
+          <td><b>Report (15)</b></td>
+          <td>Report submitted on time with similarity index less than 10</td>
+          <td>Report submitted on time with similarity index less than 25</td>
+          <td>Report not submitted on time with similarity index less than 25</td>
+        </tr>
+      </table>
+      <button type="submit" class="submit-btn">Submit Evaluation</button>
+    </form>
+  </div>
+
+  <script>
+    const supabaseUrl = "https://your-project-ref.supabase.co"; // Replace with your Supabase project URL
+    const supabaseKey = "YOUR_SUPABASE_ANON_KEY"; // Replace with your Supabase anon key
+    const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+    const form = document.getElementById('review2Form');
+    const studentInput = document.getElementById('student_id');
+    const projectInput = document.getElementById('project_id');
+    const facultyInput = document.getElementById('faculty_id');
+    const commentsInput = document.getElementById('comments');
+    const designMarksInput = document.getElementById('design_marks');
+    const implementationMarksInput = document.getElementById('implementation_marks');
+    const presentationMarksInput = document.getElementById('presentation_marks');
+    const reportMarksInput = document.getElementById('report_marks');
+    const submitBtn = form.querySelector('.submit-btn');
+
+    // Disable submit initially until valid submission
+    submitBtn.disabled = true;
+
+    // Function to check if submission exists and fetch evaluation to fill form
+    async function checkSubmissionAndLoadEvaluation() {
+      const student_id = studentInput.value.trim();
+      const project_id = projectInput.value.trim();
+
+      submitBtn.disabled = true;
+
+      if (!student_id || !project_id) return;
+
+      // Check submission exists in submission2 table
+      const { data: submission, error: subError } = await supabase
+        .from('submission2')
+        .select('id')
+        .eq('student_id', student_id)
+        .eq('project_id', project_id)
+        .limit(1)
+        .single();
+
+      if (subError && subError.code !== 'PGRST116') {
+        alert('Error checking submission: ' + subError.message);
+        return;
+      }
+      if (!submission) {
+        alert('No submission found for this Student ID and Project ID.');
+        form.reset();
+        return;
+      }
+
+      submitBtn.disabled = false;
+
+      // Fetch existing evaluation for review_no=2
+      const { data: evaluation, error: evalError } = await supabase
+        .from('evaluations')
+        .select('*')
+        .eq('student_id', student_id)
+        .eq('project_id', project_id)
+        .eq('review_no', 2)
+        .limit(1)
+        .single();
+
+      if (evalError && evalError.code !== 'PGRST116') {
+        alert('Error fetching evaluation: ' + evalError.message);
+        return;
+      }
+
+      if (evaluation) {
+        facultyInput.value = evaluation.faculty_id || '';
+        commentsInput.value = evaluation.comments || '';
+        designMarksInput.value = evaluation.design_marks ?? '';
+        implementationMarksInput.value = evaluation.implementation_marks ?? '';
+        presentationMarksInput.value = evaluation.presentation_marks ?? '';
+        reportMarksInput.value = evaluation.report_marks ?? '';
+      } else {
+        facultyInput.value = '';
+        commentsInput.value = '';
+        designMarksInput.value = '';
+        implementationMarksInput.value = '';
+        presentationMarksInput.value = '';
+        reportMarksInput.value = '';
+      }
+    }
+
+    studentInput.addEventListener('blur', checkSubmissionAndLoadEvaluation);
+    projectInput.addEventListener('blur', checkSubmissionAndLoadEvaluation);
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const student_id = studentInput.value.trim();
+      const project_id = projectInput.value.trim();
+      const faculty_id = facultyInput.value.trim();
+      const comments = commentsInput.value.trim();
+      const design_marks = Number(designMarksInput.value);
+      const implementation_marks = Number(implementationMarksInput.value);
+      const presentation_marks = Number(presentationMarksInput.value);
+      const report_marks = Number(reportMarksInput.value);
+
+      const inputs = [
+        { val: design_marks, max: 15, label: "Design Methodology" },
+        { val: implementation_marks, max: 15, label: "Implementation" },
+        { val: presentation_marks, max: 15, label: "Presentation" },
+        { val: report_marks, max: 15, label: "Report" },
+      ];
+
+      for (const input of inputs) {
+        if (isNaN(input.val) || input.val < 0 || input.val > input.max) {
+          alert(Please enter valid marks between 0 and ${input.max} for ${input.label});
+          return;
+        }
+      }
+
+      if (!student_id || !project_id || !faculty_id) {
+        alert("Please fill in all required fields.");
+        return;
+      }
+
+      const total_marks = design_marks + implementation_marks + presentation_marks + report_marks;
+
+      // Check if evaluation record exists to update
+      const { data: existingEval, error: existingEvalError } = await supabase
+        .from('evaluations')
+        .select('id')
+        .eq('student_id', student_id)
+        .eq('project_id', project_id)
+        .eq('review_no', 2)
+        .limit(1)
+        .single();
+
+      if (existingEvalError && existingEvalError.code !== 'PGRST116') {
+        alert('Error checking existing evaluation: ' + existingEvalError.message);
+        return;
+      }
+
+      if (existingEval) {
+        // Update existing
+        const { error: updateError } = await supabase
+          .from('evaluations')
+          .update({
+            faculty_id,
+            comments,
+            design_marks,
+            implementation_marks,
+            presentation_marks,
+            report_marks,
+            total_marks
+          })
+          .eq('id', existingEval.id);
+
+        if (updateError) {
+          alert('Error updating evaluation: ' + updateError.message);
+          return;
+        }
+
+        alert('Evaluation updated successfully!');
+      } else {
+        // Insert new evaluation
+        const { error: insertError } = await supabase
+          .from('evaluations')
+          .insert({
+            student_id,
+            project_id,
+            faculty_id,
+            review_no: 2,
+            comments,
+            design_marks,
+            implementation_marks,
+            presentation_marks,
+            report_marks,
+            total_marks
+          });
+
+        if (insertError) {
+          alert('Error submitting evaluation: ' + insertError.message);
+          return;
+        }
+
+        alert('Evaluation submitted successfully!');
+      }
+
+      form.reset();
+      submitBtn.disabled = true;
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Project Evaluation - Review 0</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <style>
+    /* Your existing styles from previous code */
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #181f2e 0%, #232c41 100%);
+      color: #f4f6fb;
+    }
+    .main-wrapper {
+      max-width: 920px;
+      margin: 38px auto;
+      background: rgba(24, 31, 46, 0.94);
+      border-radius: 20px;
+      padding: 40px 40px 35px 40px;
+      box-shadow: 0 8px 40px rgba(35,44,65,0.16), 0 1.5px 5px rgba(70,60,60,0.07);
+    }
+    .header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+    .profile-icon {
+      background: url("icon.jpg");
+      background-size: cover;
+      width: 65px;
+      height: 65px;
+      border-radius: 14px;
+      border: 3px solid #2f3655;
+    }
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    .nav-link {
+      padding: 9px 18px;
+      border-radius: 8px;
+      text-decoration: none;
+      color: #8cbffa;
+      font-weight: 600;
+      background: none;
+      transition: 0.15s;
+    }
+    .nav-link.active,
+    .nav-link:hover {
+      color: #fff;
+      background: linear-gradient(90deg, #4f6e, #be9e6f);
+    }
+    h1 {
+      font-size: 2.1rem;
+      font-weight: 830;
+      color: #ffeaa7;
+      letter-spacing: 0.075em;
+    }
+    .eval-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-top: 24px;
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px 20px;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    .form-group label {
+      font-weight: 520;
+      color: #c6dfff;
+    }
+    .form-group input,
+    .form-group textarea {
+      padding: 10px 13px;
+      border-radius: 7px;
+      background: #232c41;
+      border: none;
+      color: #eff0fe;
+      font-size: 1em;
+    }
+    .rubric-table,
+    .main-table {
+      border-collapse: collapse;
+      width: 100%;
+      background: none;
+      margin-top: 15px;
+      font-size: 1.06em;
+    }
+    .main-table th,
+    .rubric-table th {
+      background: #977298;
+      color: white;
+      padding: 12px;
+      text-align: center;
+      border-radius: 7px;
+      border: 1px solid #53416d;
+    }
+    .main-table td,
+    .rubric-table td {
+      background: #1d253c;
+      color: #eee;
+      border: 1.5px solid #334;
+      text-align: center;
+      padding: 16px;
+      word-break: break-word;
+    }
+    .main-table td input {
+      width: 70%;
+      padding: 8px;
+      border-radius: 6px;
+      border: none;
+      font-size: 1.1em;
+      background-color: #232c41;
+      color: #eee;
+      box-sizing: border-box;
+      font-weight: 600;
+    }
+    .rubric-table td {
+      font-weight: normal;
+      text-align: left;
+      padding: 16px 20px;
+      background: #1d253c;
+      color: #eee;
+      border: 1.5px solid #334;
+    }
+    .submit-btn {
+      background: linear-gradient(90deg, #be9e6f 60%, #4f6e);
+      color: #fff;
+      padding: 15px 36px;
+      font-weight: 700;
+      font-size: 1.05em;
+      border: none;
+      border-radius: 12px;
+      margin-top: 22px;
+      align-self: flex-end;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .submit-btn:disabled {
+      background: #555;
+      cursor: not-allowed;
+    }
+    .submit-btn:hover:not(:disabled) {
+      background: linear-gradient(90deg, #b39264 0%, #682ae9);
+    }
+    @media (max-width: 900px) {
+      .main-wrapper {
+        padding: 18px 2vw 25px 2vw;
+      }
+      .form-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    @media (max-width: 700px) {
+      .main-wrapper {
+        max-width: 99vw;
+        padding: 4vw;
+      }
+      .form-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="main-wrapper">
+    <div class="header-row">
+      <h1>Project Evaluation - Review 0</h1>
+      <img src="icon.jpg" alt="Profile Icon" class="profile-icon" />
+    </div>
+    <nav class="nav-links">
+      <a href="dashboard.html" class="nav-link">Dashboard</a>
+      <a href="projects.html" class="nav-link">View Projects</a>
+      <a href="evaluation-review0.html" class="nav-link active">Evaluation (Review 0)</a>
+      <a href="evaluation-review1.html" class="nav-link">Evaluation (Review 1)</a>
+      <a href="evaluation-review2.html" class="nav-link">Evaluation (Review 2)</a>
+    </nav>
+    <form id="review0Form" class="eval-form">
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="student_id">Student ID</label>
+          <input id="student_id" type="text" required />
+        </div>
+        <div class="form-group">
+          <label for="project_id">Project ID</label>
+          <input id="project_id" type="text" required />
+        </div>
+        <div class="form-group">
+          <label for="faculty_id">Faculty ID</label>
+          <input id="faculty_id" type="text" required />
+        </div>
+        <div class="form-group" style="grid-column: 1 / span 3;">
+          <label for="comments">Comments</label>
+          <textarea id="comments" rows="2" placeholder="Enter your comments"></textarea>
+        </div>
+      </div>
+      <h3 style="color: #b394ec; margin-top: 26px;">Review Criteria</h3>
+      <table class="main-table">
+        <tr>
+          <th>Criteria</th>
+          <th>Marks Awarded</th>
+        </tr>
+        <tr>
+          <td><b>Domain and Problem Identification (20)</b></td>
+          <td>
+            <input id="marks" type="number" min="0" max="20" required />
+          </td>
+        </tr>
+      </table>
+      <h3 style="color: #b394ec; margin-top: 42px;">Evaluation Rubrics</h3>
+      <table class="rubric-table">
+        <tr>
+          <th>Criteria</th>
+          <th>15–20 marks</th>
+          <th>7–14 marks</th>
+          <th>1–6 marks</th>
+        </tr>
+        <tr>
+          <td><b>Domain and Problem Identification (20)</b></td>
+          <td>Very relevant domain with precise problem definition</td>
+          <td>Relevant domain with clear but improvable decision</td>
+          <td>Irrelevant domain or ambiguous definition</td>
+        </tr>
+      </table>
+      <button disabled class="submit-btn" type="submit">Submit Evaluation</button>
+    </form>
+  </div>
+
+  <script>
+    const supabase = supabase.createClient('YOUR_SUPABASE_URL', 'YOUR_SUPABASE_ANON_KEY');
+
+    const studentInput = document.getElementById('student_id');
+    const projectInput = document.getElementById('project_id');
+    const facultyInput = document.getElementById('faculty_id');
+    const commentsInput = document.getElementById('comments');
+    const marksInput = document.getElementById('marks');
+    const submitBtn = document.querySelector('.submit-btn');
+    const form = document.getElementById('review0Form');
+
+    // Disable submit until submission verified
+    submitBtn.disabled = true;
+
+    async function checkSubmissionAndLoadEvaluation() {
+      const student_id = studentInput.value.trim();
+      const project_id = projectInput.value.trim();
+
+      submitBtn.disabled = true;
+
+      if (!student_id || !project_id) {
+        return;
+      }
+
+      // Check for submission exists
+      const { data: submission, error: submissionError } = await supabase
+        .from('submission0')
+        .select('id')
+        .eq('student_id', student_id)
+        .eq('project_id', project_id)
+        .limit(1)
+        .single();
+
+      if (submissionError && submissionError.code !== 'PGRST116') {
+        alert(Error checking submission: ${submissionError.message});
+        return;
+      }
+
+      if (!submission) {
+        alert('No submitted project found for this Student ID and Project ID.');
+        form.reset();
+        return;
+      }
+
+      // Enable submit since submission found
+      submitBtn.disabled = false;
+
+      // Fetch existing evaluation if any
+      const { data: evaluation, error: evaluationError } = await supabase
+        .from('evaluations')
+        .select('*')
+        .eq('student_id', student_id)
+        .eq('project_id', project_id)
+        .eq('review_no', 0)
+        .limit(1)
+        .single();
+
+      if (evaluationError && evaluationError.code !== 'PGRST116') {
+        alert(Error fetching evaluation: ${evaluationError.message});
+        return;
+      }
+
+      if (evaluation) {
+        facultyInput.value = evaluation.faculty_id || '';
+        commentsInput.value = evaluation.comments || '';
+        marksInput.value = evaluation.marks ?? '';
+      } else {
+        facultyInput.value = '';
+        commentsInput.value = '';
+        marksInput.value = '';
+      }
+    }
+
+    studentInput.addEventListener('blur', checkSubmissionAndLoadEvaluation);
+    projectInput.addEventListener('blur', checkSubmissionAndLoadEvaluation);
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const student_id = studentInput.value.trim();
+      const project_id = projectInput.value.trim();
+      const faculty_id = facultyInput.value.trim();
+      const comments = commentsInput.value.trim();
+      const marks = Number(marksInput.value);
+
+      if (!student_id || !project_id || !faculty_id) {
+        alert('Please fill all required fields.');
+        return;
+      }
+
+      if (isNaN(marks) || marks < 0 || marks > 20) {
+        alert('Marks must be between 0 and 20.');
+        return;
+      }
+
+      // Check if evaluation exists
+      const { data: existingEvaluation, error: evalErr } = await supabase
+        .from('evaluations')
+        .select('id')
+        .eq('student_id', student_id)
+        .eq('project_id', project_id)
+        .eq('review_no', 0)
+        .limit(1)
+        .single();
+
+      if (evalErr && evalErr.code !== 'PGRST116') {
+        alert(Error checking evaluation: ${evalErr.message});
+        return;
+      }
+
+      if (existingEvaluation) {
+        // Update evaluation
+        const { error: updateError } = await supabase
+          .from('evaluations')
+          .update({ faculty_id, comments, marks })
+          .eq('id', existingEvaluation.id);
+
+        if (updateError) {
+          alert(Error updating evaluation: ${updateError.message});
+          return;
+        }
+        alert('Evaluation updated successfully!');
+      } else {
+        // Insert new evaluation
+        const { error: insertError } = await supabase
+          .from('evaluations')
+          .insert({ student_id, project_id, faculty_id, comments, marks, review_no: 0 });
+
+        if (insertError) {
+          alert(Error submitting evaluation: ${insertError.message});
+          return;
+        }
+        alert('Evaluation submitted successfully!');
+      }
+
+      form.reset();
+      submitBtn.disabled = true;
+    });
+  </script>
+</body>
+</html>
