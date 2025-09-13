@@ -3,22 +3,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const path = require("path");
 const cors = require("cors");
-const path = require('path');
-const fs = require('fs');
-const express = require('express');
 
-const app = express();
-
-app.get('/signup', (req, res) => {
-  const filePath = path.join(__dirname, 'public', 'signup.html');
-  fs.access(filePath, fs.constants.F_OK, (err) => {
-    if (err) {
-      res.status(404).send('Signup page not found.');
-    } else {
-      res.sendFile(filePath);
-    }
-  });
-});
 
 
 const app = express();
@@ -151,3 +136,4 @@ app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 
 });
+
