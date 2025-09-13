@@ -3,6 +3,23 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const path = require("path");
 const cors = require("cors");
+const path = require('path');
+const fs = require('fs');
+const express = require('express');
+
+const app = express();
+
+app.get('/signup', (req, res) => {
+  const filePath = path.join(__dirname, 'public', 'signup.html');
+  fs.access(filePath, fs.constants.F_OK, (err) => {
+    if (err) {
+      res.status(404).send('Signup page not found.');
+    } else {
+      res.sendFile(filePath);
+    }
+  });
+});
+
 
 const app = express();
 const PORT = 3000;
@@ -20,7 +37,7 @@ mongoose.connect("mongodb+srv://neha:r4p6KvzIL8y01xGd@cluster1.bpcfq4r.mongodb.n
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
-.then(() => console.log("✅ MongoDB Connected"))
+.then(() => console.log(" MongoDB Connected"))
 .catch(err => console.error("❌ MongoDB Connection Error:", err));
 
 // Enhanced User Schema
@@ -131,5 +148,6 @@ app.get("/api/profile/:id", async (req, res) => {
 
 // Start server
 app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
+  console.log(`Server running on http://localhost:${PORT}`);
+
 });
