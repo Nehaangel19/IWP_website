@@ -111,75 +111,80 @@
     </div>
   </div>
 
-  <script>
-    document.getElementById("signupForm").addEventListener("submit", async (e) => {
-      e.preventDefault();
-      
-      const name = document.getElementById("name").value;
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
-      const confirmPassword = document.getElementById("confirmPassword").value;
-      const userType = document.getElementById("userType").value;
+ <script>
+document.getElementById("signupForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  const confirmPassword = document.getElementById("confirmPassword").value;
+  const userType = document.getElementById("userType").value;
 
-      const errorDiv = document.getElementById("errorMessage");
-      const successDiv = document.getElementById("successMessage");
-      
-      // Hide previous messages
-      errorDiv.style.display = "none";
-      successDiv.style.display = "none";
+  const errorDiv = document.getElementById("errorMessage");
+  const successDiv = document.getElementById("successMessage");
+  const signupBtn = document.getElementById("signupBtn");
 
-      // Validate passwords match
-      if (password !== confirmPassword) {
-        errorDiv.innerText = "Passwords do not match!";
-        errorDiv.style.display = "block";
-        return;
-      }
+  // Hide previous messages
+  errorDiv.style.display = "none";
+  successDiv.style.display = "none";
 
-      // Validate password length
-      if (password.length < 6) {
-        errorDiv.innerText = "Password must be at least 6 characters long!";
-        errorDiv.style.display = "block";
-        return;
-      }
+  // Validate passwords match
+  if (password !== confirmPassword) {
+    errorDiv.innerText = "Passwords do not match!";
+    errorDiv.style.display = "block";
+    return;
+  }
 
-      try {
-        const signupBtn = document.getElementById("signupBtn");
-        signupBtn.disabled = true;
-        signupBtn.innerText = "Creating Account...";
+  // Validate password length
+  if (password.length < 6) {
+    errorDiv.innerText = "Password must be at least 6 characters long!";
+    errorDiv.style.display = "block";
+    return;
+  }
 
-        const res = await fetch("http://localhost:3000/signup", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name, email, password, userType })
-        });
+  // Show loading state
+  signupBtn.disabled = true;
+  signupBtn.innerText = "Creating...";
 
-        const data = await res.json();
-        
-        if (res.ok) {
-          successDiv.innerText = "Account created successfully! Redirecting to login...";
-          successDiv.style.display = "block";
-          
-          // Clear form
-          document.getElementById("signupForm").reset();
-          
-          // Redirect after 2 seconds
-          setTimeout(() => {
-            window.location.href = "login.html";
-          }, 2000);
-        } else {
-          errorDiv.innerText = data.error || "Signup failed. Please try again.";
-          errorDiv.style.display = "block";
-        }
-      } catch (err) {
-        console.error("Error:", err);
-        errorDiv.innerText = "Server not reachable. Please try again later.";
-        errorDiv.style.display = "block";
-      } finally {
-        const signupBtn = document.getElementById("signupBtn");
-        signupBtn.disabled = false;
-        signupBtn.innerText = "Create Account";
-      }
+  try {
+    const response = await fetch("https://IWP_website.vercel.app/api/signup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, password, userType })
     });
-  </script>
+
+    const data = await response.json();
+    console.log(data);
+
+    if (response.ok) {
+      successDiv.innerText = "Account created successfully! Redirecting to login...";
+      successDiv.style.display = "block";
+
+      // Clear form
+      document.getElementById("signupForm").reset();
+
+      // Redirect after 2 seconds
+      setTimeout(() => {
+        window.location.href = "login.html";
+      }, 2000);
+
+    } else {
+      errorDiv.innerText = data.error || "Signup failed. Please try again.";
+      errorDiv.style.display = "block";
+    }
+
+  } catch (err) {
+    console.error("Error during signup:", err);
+    errorDiv.innerText = "Server not reachable. Please try again later.";
+    errorDiv.style.display = "block";
+
+  } finally {
+    signupBtn.disabled = false;
+    signupBtn.innerText = "Create Account";
+  }
+});
+</script>
+
 </body>
 </html>

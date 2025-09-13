@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Team 10 - BTech CSE</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      min-height: 100vh;
+      background: radial-gradient(ellipse at top left, #161f39 0%, #23263a 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+    .team-card {
+      background: #212941;
+      border-radius: 26px;
+      box-shadow: 0 4px 32px #000a;
+      width: 95vw;
+      max-width: 410px;
+      padding: 42px 32px 32px 32px;
+      position: relative;
+      color: #f4f6fa;
+      animation: slideDown 1.2s cubic-bezier(0.7, 0.11, 0.33, 1.2);
+    }
+    .team-card:before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 6px;
+      border-radius: 26px 26px 0 0;
+      background-image: linear-gradient(90deg,#8e8cf3 0%,#25cff7 95%);
+    }
+    .team-title {
+      text-align: center;
+      font-size: 2.3rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+      color: #8e8cf3;
+      letter-spacing: 1px;
+    }
+    .team-desc {
+      text-align: center;
+      font-size: 1.11rem;
+      color: #8491b4;
+      margin-bottom: 30px;
+    }
+    .team-info-group {
+      margin-bottom: 18px;
+      text-align: center;
+    }
+    .team-label {
+      font-weight: 700;
+      color: #e2e6ff;
+      letter-spacing: .4px;
+      margin-right: 4px;
+    }
+    .team-data {
+      color: #25cff7;
+      font-weight: 500;
+    }
+    .team-members-title {
+      font-size: 1.19rem;
+      color: #fe6e60;
+      font-weight: bold;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 24px 0;
+    }
+    ul li {
+      background: #232b44;
+      color: #d8e3fa;
+      margin-bottom: 8px;
+      padding: 11px 14px;
+      border-radius: 11px;
+      font-size: 1.05rem;
+      box-shadow: 0px 2px 10px -8px #25cff7;
+      display: flex;
+      justify-content: center;
+    }
+    .next-btn {
+      display: block;
+      width: 100%;
+      padding: 16px 0;
+      font-size: 1.11rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+      border: none;
+      background: linear-gradient(90deg, #3796ff 0%, #25cff7 100%);
+      color: #fff;
+      border-radius: 12px;
+      margin-top: 8px;
+      margin-bottom: 16px;
+      cursor: pointer;
+      box-shadow: 0 2px 14px -8px #25cff7;
+      transition: background 0.25s, transform 0.15s;
+      text-decoration: none;
+      text-align: center;
+      animation: fadeInUp 1.3s 0.6s cubic-bezier(.6,.11,.23,1.3);
+    }
+    .next-btn:hover {
+      background: linear-gradient(92deg, #25cff7 0%, #8e8cf3 100%);
+      transform: scale(1.04);
+    }
+    @keyframes slideDown {
+      from {transform: translateY(-60px) scale(0.85); opacity: 0;}
+      to {transform: translateY(0) scale(1); opacity: 1;}
+    }
+    @keyframes fadeInUp {
+      from {opacity: 0; transform: translateY(32px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+    @media (max-width: 600px) {
+      .team-card {padding: 24px 8vw;}
+      .team-title {font-size: 1.4rem;}
+    }
+  </style>
+</head>
+<body>
+  <div class="team-card">
+    <div class="team-title">Team 10</div>
+    <div class="team-desc">BTech CSE - Project Group</div>
+    <div class="team-info-group">
+      <span class="team-label">Team No.:</span>
+      <span class="team-data">10</span>
+      <br>
+      <span class="team-label">Course:</span>
+      <span class="team-data">BTech CSE</span>
+    </div>
+    <div class="team-members-title">Members</div>
+    <ul>
+        <li>NEHA ANGEL - 2360357</li>
+      <li>PRACHI MISHRA - 2360436</li>
+      
+      <li>JIYA REEBA AJIT - 2360387</li>
+      <li>CATHERINE ELSA PHILIPOSE - 2360353</li>
+    </ul>
+    <a class="next-btn" href="signup.html">Next</a>
+  </div>
+</body>
+</html>
