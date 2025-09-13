@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Faculty Dashboard - Project Reviews</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #181f2e 0%, #232c41 100%);
+      color: #f4f6fb;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    .main-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: rgba(24, 31, 46, 0.93);
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 8px 40px rgba(35,44,65,0.15);
+    }
+    .header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 30px;
+      border-bottom: 2px solid #2f3655;
+      padding-bottom: 20px;
+    }
+    .profile-section {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .profile-icon {
+      background: url("icon.jpg");
+      background-size: cover;
+      width: 70px;
+      height: 70px;
+      border-radius: 16px;
+      border: 3px solid #2f3655;
+    }
+    .faculty-info h2 {
+      margin: 0;
+      color: #fff;
+      font-size: 1.2rem;
+    }
+    .faculty-info p {
+      margin: 2px 0 0 0;
+      color: #96b5ff;
+      font-size: 14px;
+    }
+    h1 {
+      font-size: 2.2rem;
+      color: #fff;
+      font-weight: 800;
+      margin: 0;
+    }
+
+    /* Tab Navigation */
+    .tab-navigation {
+      display: flex;
+      gap: 5px;
+      margin-bottom: 30px;
+      background: rgba(35, 44, 65, 0.5);
+      border-radius: 12px;
+      padding: 5px;
+    }
+    .tab-btn {
+      flex: 1;
+      padding: 15px 20px;
+      background: transparent;
+      border: none;
+      color: #96b5ff;
+      font-size: 16px;
+      font-weight: 500;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+    .tab-btn:hover {
+      background: rgba(150, 181, 255, 0.1);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+    .tab-btn.active {
+      background: linear-gradient(90deg, #be9e6f 0%, #4f46e5 100%);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(190, 158, 111, 0.3);
+    }
+
+    /* Redirect indicators */
+    .redirect-icon {
+      font-size: 12px;
+      opacity: 0.7;
+      margin-left: 5px;
+    }
+
+    /* Welcome content for dashboard */
+    .dashboard-content {
+      background: rgba(35, 44, 65, 0.5);
+      border-radius: 12px;
+      padding: 60px;
+      text-align: center;
+      min-height: 400px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .dashboard-icon {
+      font-size: 64px;
+      margin-bottom: 30px;
+      opacity: 0.7;
+    }
+    .dashboard-title {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #be9e6f;
+      margin-bottom: 20px;
+    }
+    .dashboard-description {
+      color: #96b5ff;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      max-width: 600px;
+    }
+
+    @media (max-width: 768px) {
+      .main-wrapper { 
+        padding: 20px; 
+      }
+      .header-row { 
+        flex-direction: column; 
+        gap: 20px; 
+        text-align: center; 
+      }
+      .tab-navigation { 
+        flex-direction: column; 
+      }
+      .tab-btn { 
+        justify-content: center; 
+      }
+      .dashboard-content {
+        padding: 40px 20px;
+      }
+      .dashboard-title {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="main-wrapper">
+    <div class="header-row">
+      <h1>Faculty Dashboard</h1>
+      <div class="profile-section">
+        <div class="faculty-info">
+          <h2>Prof. Faculty Name</h2>
+          <p>Computer Science Department</p>
+        </div>
+        <div class="profile-icon"></div>
+      </div>
+    </div>
+
+    <!-- Tab Navigation with Direct Links -->
+    <div class="tab-navigation">
+      <a href="evaluation-review0.html" class="tab-btn">
+        Review 0 Evaluation
+        <span class="redirect-icon">→</span>
+      </a>
+      <a href="evaluation-review1.html" class="tab-btn">
+        Review 1 Evaluation
+        <span class="redirect-icon">→</span>
+      </a>
+      <a href="evaluation-review2.html" class="tab-btn">
+        Review 2 Evaluation
+        <span class="redirect-icon">→</span>
+      </a>
+    </div>
+
+    <!-- Dashboard Welcome Content -->
+    <div class="dashboard-content">
+      <div class="dashboard-icon">📊</div>
+      <div class="dashboard-title">Faculty Evaluation Dashboard</div>
+      <div class="dashboard-description">
+        Welcome to the Faculty Evaluation System. Click on the evaluation tabs above to access the respective review evaluation pages where you can input marks and evaluate student submissions.
+      </div>
+    </div>
+  </div>
+</body>
+</html>
