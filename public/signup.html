@@ -65,7 +65,7 @@
 <body>
   <div class="signup-container">
     <div class="logo">
-      <h1>ProAssess</h1>
+      <h1>Christ University</h1>
       <p>Final Year Project Assessment System</p>
     </div>
 
@@ -148,7 +148,10 @@ document.getElementById("signupForm").addEventListener("submit", async (e) => {
   signupBtn.innerText = "Creating...";
 
   try {
-    const response = await fetch("https://IWP_website.vercel.app/api/signup", {
+    const response = await fetch("https://neha-angel.onrender.com/signup", 
+   
+
+    {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name, email, password, userType })
